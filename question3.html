@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Tic-Tac-Toe</title>
+    <style>
+        .row div {
+            padding: 10px;       
+            height: 80px;
+            width: 80px;
+            float: left;
+			background-color: grey;
+			border: 5px solid white;
+			font-size:80px;
+			text-align: center;		
+					
+        }
+        .row {
+            clear: both;
+			color:#ffffff;
+        }
+		#winner {
+			font-size: 50px;
+			
+		}
+    </style>
+    </head>
+<body>
+   <span id="winner">Player O goes first!</span>
+    <div>
+       <div class="row"> 
+            <div id="0_0" onclick="place(this)"></div>
+            <div id="1_0" onclick="place(this)"></div>
+            <div id="2_0" onclick="place(this)"></div>
+        </div>
+        <div class="row">
+            <div id="0_1" onclick="place(this)"></div>
+            <div id="1_1" onclick="place(this)"></div>
+            <div id="2_1"onclick="place(this)"></div>
+        </div>
+        <div class="row">
+            <div id="0_2" onclick="place(this)"></div>
+            <div id="1_2" onclick="place(this)"></div>
+            <div id="2_2" onclick="place(this)"></div>
+        </div>
+    </div>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<input type="button" onclick="resetGame()" value="Reset">
+	
+    <script>
+    var player = "O";
+    var counter = 0;
+	var won = false;
+				
+		function place(box) {      
+         // if the box is not empty or the won variable is true stop the process here
+		if(box.innerText != "" || won) return;
+		   box.innerText = player;
+			if(player == "O"){	
+				box.style.color = "blue";
+				player = "X";
+			}
+			else {
+				box.style.color = "red";
+				player = "O";
+			}
+			// add counter to stop the game as a draw after 9 turns
+           	counter++;
+			if(counter > 8){
+			// output the message draw!
+			document.getElementById("winner").innerHTML = "Draw!";	
+		    }
+			// calling the methods to check if the game has been won
+		    checkFirstRowGameBoard();
+			checkSecondRowGameBoard();
+			checkThirdRowGameBoard(); 
+			checkFirstColumnGameBoard();			
+			checkSecondColumnGameBoard();
+			checkThirdColumnGameBoard();	
+			checkLRDiagonalGameBoard();	
+		    checkRLDiagonalGameBoard();					
+		}	
+        function checkFirstRowGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("0_0").innerText;
+            var second = document.getElementById("1_0").innerText;
+            var third = document.getElementById("2_0").innerText;
+            // if first element is not empty and is the same as the second and third then you win  
+			if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+				if (first == "O") {	
+				var message = document.getElementById("winner");
+				message.innerHTML = "O wins!";
+				// change element background colors
+				document.getElementById("0_0").style.backgroundColor = "lightblue"
+				document.getElementById("1_0").style.backgroundColor = "lightblue"
+				document.getElementById("2_0").style.backgroundColor = "lightblue"
+				won = true;				
+				} 
+				// if the first is an X then output X player wins
+				else if (first == "X") {
+				var message = document.getElementById("winner");
+				message.innerHTML = "X wins!";
+				// change element background colors
+				document.getElementById("0_0").style.backgroundColor = "lightblue"
+				document.getElementById("1_0").style.backgroundColor = "lightblue"
+				document.getElementById("2_0").style.backgroundColor = "lightblue"
+				won = true;
+				}
+			}
+		}
+		function checkSecondRowGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("0_1").innerText;
+            var second = document.getElementById("1_1").innerText;
+            var third = document.getElementById("2_1").innerText;
+			// if first element is not empty and is the same as the second and third then you win
+            if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+			if (first == "O") {	
+				var message = document.getElementById("winner");
+				message.innerHTML = "O wins!";
+				// change element background colors
+				document.getElementById("0_1").style.backgroundColor = "lightblue"
+				document.getElementById("1_1").style.backgroundColor = "lightblue"
+				document.getElementById("2_1").style.backgroundColor = "lightblue"
+				won = true;
+		    }
+			// if the first is an X then output X player wins
+			else if (first == "X") {
+				var message = document.getElementById("winner");
+				message.innerHTML = "X wins!";
+				// change element background colors
+				document.getElementById("0_1").style.backgroundColor = "lightblue"
+				document.getElementById("1_1").style.backgroundColor = "lightblue"
+				document.getElementById("2_1").style.backgroundColor = "lightblue"
+				won = true;
+					}
+			}
+		}
+		function checkThirdRowGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("0_2").innerText;
+            var second = document.getElementById("1_2").innerText;
+            var third = document.getElementById("2_2").innerText;
+			// if first element is not empty and is the same as the second and third then you win
+            if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+			if (first == "O") {	
+				var message = document.getElementById("winner");
+				message.innerHTML = "O wins!";
+				// change element background colors
+				document.getElementById("0_2").style.backgroundColor = "lightblue"
+				document.getElementById("1_2").style.backgroundColor = "lightblue"
+				document.getElementById("2_2").style.backgroundColor = "lightblue"
+				won = true;
+		    }
+			// if the first is an X then output X player wins
+			else if (first == "X") {
+				var message = document.getElementById("winner");
+				message.innerHTML = "X wins!";
+				// change element background colors
+				document.getElementById("0_2").style.backgroundColor = "lightblue"
+				document.getElementById("1_2").style.backgroundColor = "lightblue"
+				document.getElementById("2_2").style.backgroundColor = "lightblue"
+				won = true;
+					}
+			}
+		}
+		function checkFirstColumnGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("0_0").innerText;
+            var second = document.getElementById("0_1").innerText;
+            var third = document.getElementById("0_2").innerText;
+			// if first element is not empty and is the same as the second and third then you win
+            if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+			if (first == "O") {	
+				var message = document.getElementById("winner");
+				message.innerHTML = "O wins!";
+				// change element background colors
+				document.getElementById("0_0").style.backgroundColor = "lightblue"
+				document.getElementById("0_1").style.backgroundColor = "lightblue"
+				document.getElementById("0_2").style.backgroundColor = "lightblue"
+				won = true;
+		    }
+			// if the first is an X then output X player wins
+			else if (first == "X") {
+				var message = document.getElementById("winner");
+				message.innerHTML = "X wins!";
+				// change element background colors
+				document.getElementById("0_0").style.backgroundColor = "lightblue"
+				document.getElementById("0_1").style.backgroundColor = "lightblue"
+				document.getElementById("0_2").style.backgroundColor = "lightblue"
+				won = true;
+					}
+			}
+		}
+		function checkSecondColumnGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("1_0").innerText;
+            var second = document.getElementById("1_1").innerText;
+            var third = document.getElementById("1_2").innerText;
+			// if first element is not empty and is the same as the second and third then you win
+            if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+			if (first == "O") {	
+				var message = document.getElementById("winner");
+				message.innerHTML = "O wins!";
+				// change element background colors
+				document.getElementById("1_0").style.backgroundColor = "lightblue"
+				document.getElementById("1_1").style.backgroundColor = "lightblue"
+				document.getElementById("1_2").style.backgroundColor = "lightblue"
+				won = true;
+		    }
+			// if the first is an X then output X player wins
+			else if (first == "X") {
+					var message = document.getElementById("winner");
+					message.innerHTML = "X wins!";
+					// change element background colors
+					document.getElementById("1_0").style.backgroundColor = "lightblue"
+				    document.getElementById("1_1").style.backgroundColor = "lightblue"
+				    document.getElementById("1_2").style.backgroundColor = "lightblue"
+					won = true;
+					}
+			}
+		}
+		function checkThirdColumnGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("2_0").innerText;
+            var second = document.getElementById("2_1").innerText;
+            var third = document.getElementById("2_2").innerText;
+			// if first element is not empty and is the same as the second and third then you win
+            if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+				if (first == "O") {	
+					var message = document.getElementById("winner");
+					message.innerHTML = "O wins!";
+					// change element background colors
+					document.getElementById("2_0").style.backgroundColor = "lightblue"
+					document.getElementById("2_1").style.backgroundColor = "lightblue"
+					document.getElementById("2_2").style.backgroundColor = "lightblue"
+					won = true;
+		    }
+			// if the first is an X then output X player wins
+			else if (first == "X") {
+					var message = document.getElementById("winner");
+					message.innerHTML = "X wins!";
+					// change element background colors
+					document.getElementById("2_0").style.backgroundColor = "lightblue"
+				    document.getElementById("2_1").style.backgroundColor = "lightblue"
+			     	document.getElementById("2_2").style.backgroundColor = "lightblue"
+					won = true;
+					}
+			}
+		}
+		function checkLRDiagonalGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("0_2").innerText;
+            var second = document.getElementById("1_1").innerText;
+            var third = document.getElementById("2_0").innerText;
+			// if first element is not empty and is the same as the second and third then you win
+            if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+				if (first == "O") {	
+				var message = document.getElementById("winner");
+				message.innerHTML = "O wins!";
+				// change element background colors
+				document.getElementById("0_2").style.backgroundColor = "lightblue"
+				document.getElementById("1_1").style.backgroundColor = "lightblue"
+				document.getElementById("2_0").style.backgroundColor = "lightblue"
+				won = true;
+		    }
+			// if the first is an X then output X player wins
+			else if (first == "X") {
+					var message = document.getElementById("winner");
+					message.innerHTML = "X wins!";
+					// change element background colors
+					document.getElementById("0_2").style.backgroundColor = "lightblue"
+					document.getElementById("1_1").style.backgroundColor = "lightblue"
+				    document.getElementById("2_0").style.backgroundColor = "lightblue"
+					won = true;
+						}
+			}
+		}
+		function checkRLDiagonalGameBoard() {
+			// assigning the element IDs to first, second and third
+            var first = document.getElementById("2_2").innerText;
+            var second = document.getElementById("1_1").innerText;
+            var third = document.getElementById("0_0").innerText;
+			// if first element is not empty and is the same as the second and third then you win
+            if(first != "" && first == second && first == third) {
+			// if the first is an O then output O player wins
+			if (first == "O") {	
+				var message = document.getElementById("winner");
+				message.innerHTML = "O wins!";
+				// change element background colors
+				document.getElementById("2_2").style.backgroundColor = "lightblue"
+				document.getElementById("1_1").style.backgroundColor = "lightblue"
+				document.getElementById("0_0").style.backgroundColor = "lightblue"
+				won = true;
+		    }
+			// if the first is an X then output X player wins
+			else if (first == "X") {
+					var message = document.getElementById("winner");
+					message.innerHTML = "X wins!";
+					// change element background colors
+					document.getElementById("2_2").style.backgroundColor = "lightblue"
+					document.getElementById("1_1").style.backgroundColor = "lightblue"
+					document.getElementById("0_0").style.backgroundColor = "lightblue"
+					won = true;
+					}
+			}
+		}
+	    function resetGame() {		
+			// resetting the game IDs to their original values
+			document.getElementById("0_0").innerText = "";
+			document.getElementById("1_0").innerText = "";
+			document.getElementById("2_0").innerText = "";
+			document.getElementById("0_1").innerText = "";
+			document.getElementById("1_1").innerText = "";
+			document.getElementById("2_1").innerText = "";
+			document.getElementById("0_2").innerText = "";
+			document.getElementById("1_2").innerText = "";
+			document.getElementById("2_2").innerText = "";			
+			document.getElementById("winner").innerHTML = "Player O goes first!";			
+			document.getElementById("0_0").style.backgroundColor = "grey";
+			document.getElementById("1_0").style.backgroundColor = "grey";
+			document.getElementById("2_0").style.backgroundColor = "grey";
+			document.getElementById("0_1").style.backgroundColor = "grey";
+			document.getElementById("1_1").style.backgroundColor = "grey";
+			document.getElementById("2_1").style.backgroundColor = "grey";
+			document.getElementById("0_2").style.backgroundColor = "grey";
+			document.getElementById("1_2").style.backgroundColor = "grey";
+			document.getElementById("2_2").style.backgroundColor = "grey";	
+			counter = 0;
+			won = false;
+			player = "O";
+	    }
+			
+    </script>
+</body>
+</html>
